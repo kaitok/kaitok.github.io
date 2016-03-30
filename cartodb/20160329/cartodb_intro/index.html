@@ -1,0 +1,301 @@
+<!--
+slidedeck: A modification of the Google IO 2012 HTML5 slide template
+URL: https://github.com/rmcgibbo/slidedeck
+
+Based on https://github.com/francescolaffi/elastic-google-io-slides, and
+ultimately:
+
+Google IO 2012 HTML5 Slide Template
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahe <lukem@google.com>
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title> CartoDB入門</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/custom.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides", src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
+
+
+  <!-- MathJax support  -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    showProcessingMessages: false,
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    TeX: {
+      extensions: ["color.js"]
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+  </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <div style="display:hidden">
+  \[
+    \definecolor{data}{RGB}{18,110,213}
+    \definecolor{unknown}{RGB}{217,86,16}
+    \definecolor{learned}{RGB}{175,114,176}
+  \]
+  </div>
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+
+    <h1> CartoDB入門</h1>
+    <h2></h2>
+    <p> <img src="http://nightley.jp/wp/wp-content/uploads/2015/03/newlogo.svg" alt="Nightley Inc." width="150"><br/> <h4>Kaito Kinjo</h4></p>
+  </hgroup>
+</slide>
+
+
+<slide  >
+  
+    <hgroup>
+      <h2>自己紹介</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><!-- <img src="http://nightley.jp/wp/wp-content/uploads/2015/03/newlogo.svg" alt="Nightley Inc." width="130">
+
+<h3 class="name">Kaito kinjo</h3>
+ -->
+
+<p> <img src="http://nightley.jp/wp/wp-content/uploads/2015/03/newlogo.svg" alt="Nightley Inc." width="130"><br> </p>
+
+<h4 class="name">Kaito Kinjo</h4>
+
+<p><br></p>
+<ul>
+<li>Webアプリケーションエンジニア</li>
+<li>訪日外国人行動分析サービス<ul>
+<li><img src="http://inbound.nightley.jp/img/logo@2x.png" alt="inbound insight" width="300"></li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide class="img-bottom-left" >
+  
+    <hgroup>
+      <h2>CartoDBとは？</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><img src="http://cartodb.s3.amazonaws.com/static/logos_full_cartodb_light.png" width="150"></p>
+<h3>地理空間情報可視化webサービス</h3>
+<ul>
+<li>緯度経度情報をもとにデータをマッピング</li>
+<li>CSVやGeoJSONなどのファイルに対応</li>
+</ul>
+<p><img src=img/c5.png height="190"/>
+<img src=img/c3.png height="190" />
+<img src=img/c4.png height="190"/></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>CartoDBの特徴</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>ブラウザ上でデータと地図を修正・管理できる</li>
+<li>SQLが書ける</li>
+<li>Map上のデータをCSSでスタイリングできる</li>
+</ul>
+<p><br></p>
+<p><img src="http://docs.cartodb.com/img/layout/cartodb-editor/dashboard/cartodb_dashboard.de16786b.jpg" height="270"/>
+<img src="http://docs.cartodb.com/img/layout/cartodb-editor/managing-your-data/sql_queries.ffa0e989.jpg" height="270"/>
+<img src="http://docs.cartodb.com/img/layout/common/cartocss_editor.350309a5.jpg" height="270"/></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>CartoDBの構成</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>
+<p>データベース</p>
+<ul>
+<li>PostGIS</li>
+</ul>
+</li>
+<li>
+<p>Map 描画</p>
+<ul>
+<li>Leaflet.js</li>
+</ul>
+</li>
+<li>
+<p>Map Tile</p>
+<ul>
+<li>Open Street Map</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<p><img src="https://www.sraoss.co.jp/prod_serv/support/oss-info/logo/postgis.png" width="200">
+<img src="http://leafletjs.com/docs/images/logo.png" width="400">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Openstreetmap_logo.svg/2000px-Openstreetmap_logo.svg.png" width="100"></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>Example</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><h1>NYC Street Trees</h1>
+<p><a href="http://jillhubley.com/project/nyctrees/">http://jillhubley.com/project/nyctrees/</a></p>
+<p><br></p>
+<h1>NYC Taxis: A Day in the Life</h1>
+<p><a href="http://nyctaxi.herokuapp.com/">http://nyctaxi.herokuapp.com/</a></p></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>CartoDBでできること</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><table>
+  <thead>
+    <tr>
+      <th><h3>Point</h3></th>
+      <th><h3>Polygon</h3></th>
+      <th><h3>HeatMap</h3></th>
+      <th><h3>Line</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src=img/c5.png height="130"/></td>
+      <td><img src=img/c3.png height="130"/></td>
+      <td><img src=img/c8.png height="130"/></td>
+      <td><img src=img/c4.png height="130"/></td>
+    </tr>
+  </tbody>
+</table></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>CartoDBでできること</h2>
+      <h3>Point</h3>
+    </hgroup>
+    <article ><iframe width="100%" height="180" style="max-height: 400px;" frameborder="0" src="https://staff615.cartodb.com/viz/66526e84-f554-11e5-aa2b-0ef24382571b/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>CartoDBでできること</h2>
+      <h3>Polygon</h3>
+    </hgroup>
+    <article ><iframe width="100%" height="180" style="max-height: 400px;" frameborder="0" src="https://staff615.cartodb.com/viz/031e822a-f555-11e5-a3e9-0ecd1babdde5/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>CartoDBでできること</h2>
+      <h3>HeatMap</h3>
+    </hgroup>
+    <article ><iframe width="100%" height="180" style="max-height: 400px;" frameborder="0" src="https://staff615.cartodb.com/viz/252db7c2-f56f-11e5-980e-0ecfd53eb7d3/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>CartoDBでできること</h2>
+      <h3>Line</h3>
+    </hgroup>
+    <article ><iframe width="100%" height="180" style="max-height: 400px;" frameborder="0" src="https://staff615.cartodb.com/viz/c7e1afa2-e852-11e5-b273-0ea31932ec1d/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>実際につくってみましょう</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><iframe width="100%" height="180" style="max-height: 400px;" frameborder="0" src="https://nightley.cartodb.com/viz/69fbae04-f425-11e5-92c2-0ecfd53eb7d3/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2></h2>
+      <h3></h3>
+    </hgroup>
+    <article ><h1><a href="../handson/index.html"> CartoDBを使ってみる</a></h1></article>
+ 
+</slide>
+
+
+<slide class="thank-you-slide segue nobackground">
+  <!-- <aside class="gdbar right"><img src="images/google_developers_icon_128.png"></aside> -->
+  <article class="flexbox vleft auto-fadein">
+    <h2></h2>
+    <p></p>
+  </article>
+  <p data-config-contact class="auto-fadein"></p>
+  </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-56093198-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>

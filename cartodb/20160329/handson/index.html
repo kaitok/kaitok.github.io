@@ -1,0 +1,263 @@
+<!--
+slidedeck: A modification of the Google IO 2012 HTML5 slide template
+URL: https://github.com/rmcgibbo/slidedeck
+
+Based on https://github.com/francescolaffi/elastic-google-io-slides, and
+ultimately:
+
+Google IO 2012 HTML5 Slide Template
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahe <lukem@google.com>
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title> CartoDBを使ってみる</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/custom.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides", src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
+
+
+  <!-- MathJax support  -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    showProcessingMessages: false,
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    TeX: {
+      extensions: ["color.js"]
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+  </script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <div style="display:hidden">
+  \[
+    \definecolor{data}{RGB}{18,110,213}
+    \definecolor{unknown}{RGB}{217,86,16}
+    \definecolor{learned}{RGB}{175,114,176}
+  \]
+  </div>
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+
+    <h1> CartoDBを使ってみる</h1>
+    <h2></h2>
+    <p> <img src="http://nightley.jp/wp/wp-content/uploads/2015/03/newlogo.svg" alt="Nightley Inc." width="150"><br/> <h4>Kaito Kinjo</h4></p>
+  </hgroup>
+</slide>
+
+
+<slide  >
+  
+    <hgroup>
+      <h2>今回作成するMap</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>
+<p>データ内容</p>
+<ul>
+<li>データ渋谷周辺のSNSデータ</li>
+</ul>
+</li>
+<li>
+<p>Map Style</p>
+<ul>
+<li>ポイントMap</li>
+<li>ヒートMap</li>
+<li>Torque Map (アニメーション)</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>完成イメージ</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><iframe width="100%" height="520" frameborder="0" src="https://nightley.cartodb.com/viz/69fbae04-f425-11e5-92c2-0ecfd53eb7d3/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>大まかな流れ</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>csvファイルをダウンロード</li>
+<li>CartoDBにログイン</li>
+<li>csvファイルをCartoDBにアップロード</li>
+<li>Mapを作成</li>
+<li>スタイルを調整</li>
+<li>Mapを公開</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>1. csvファイルをダウンロード</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><h3>渋谷区SNSデータ (2016/3/27)</h3>
+<h4><a href="http://goo.gl/LLvm0G">http://goo.gl/LLvm0G</a></h4></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>2. CartoDBにログイン</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><h3>CartoDB</h3>
+<h4><a href="https://cartodb.com/">https://cartodb.com/</a></h4></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>3. csvファイルをCartoDBにアップロード</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>左上のメニューからDatasetsを選択</li>
+<li>右上の緑色の「NEW DATASET」ボタンをクリック</li>
+<li>CSVファイルを Drag &amp; drop</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>4. Mapを作成</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>左上のメニューからMapsを選択</li>
+<li>右上の緑色の「NEW MAP」ボタンをクリック</li>
+<li>先ほどインポートした「shibuya.csv」を選択</li>
+<li>右下の緑色の「CREATE MAP」ボタンをクリック</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>5. スタイルを調整</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>画面右側のこのマークを選択</li>
+<li>スタイルを選択<ul>
+<li>SMPLE</li>
+<li>HEATMAP</li>
+<li>TORQUE</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>6. Mapを公開</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><ul>
+<li>右上の「PUBLISH」ボタンをクリック<ul>
+<li>「Get the link」 CartoDB内の公開ページのURLを共有</li>
+<li>「 Embed it」HTML等に埋め込み</li>
+<li>「CartoDB.js」javascriptライブラリとして使用</li>
+</ul>
+</li>
+</ul></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2>渋谷周辺SNSデータ</h2>
+      <h3></h3>
+    </hgroup>
+    <article ><iframe width="100%" height="520" frameborder="0" src="https://nightley.cartodb.com/viz/69fbae04-f425-11e5-92c2-0ecfd53eb7d3/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe></article>
+ 
+</slide>
+
+<slide  >
+  
+    <hgroup>
+      <h2><a href="http://inbound.nightley.jp/"><img src="http://inbound.nightley.jp/img/logo@2x.png" alt="inbound insight" width="300"></a></h2>
+      <h3></h3>
+    </hgroup>
+    <article ><p><img src="http://inbound.nightley.jp//img/top_ss_pro.png" width="700" alt="PROプラン画面" class="ii_image"></p></article>
+ 
+</slide>
+
+
+<slide class="thank-you-slide segue nobackground">
+  <!-- <aside class="gdbar right"><img src="images/google_developers_icon_128.png"></aside> -->
+  <article class="flexbox vleft auto-fadein">
+    <h2></h2>
+    <p></p>
+  </article>
+  <p data-config-contact class="auto-fadein"></p>
+  </p>
+</slide>
+
+<slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-56093198-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
