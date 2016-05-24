@@ -1,0 +1,13 @@
+SELECT 
+ROUND(
+  CAST(
+    ST_Distance(
+      the_geom
+      ,ST_SetSRID(
+        ST_MakePoint(0,1)
+        ,4326
+        )
+      ,false
+    )as numeric),1)
+distance
+FROM shibuya_gyoza
